@@ -5,5 +5,6 @@
             "title": "Student Created",
             "message": "Record ID: " + event.getParam("id")
         });
+        console.log('id'+event.getParam("id"));
     }
 })
