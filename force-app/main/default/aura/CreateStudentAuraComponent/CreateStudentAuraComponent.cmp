@@ -1,0 +1,23 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" 
+access="global"
+controller="SearchComController">
+<lightning:card title="Create Student">
+    <lightning:recordEditForm aura:id="recordEditForm"
+                                objectApiName="HocSinh__c"
+                                onsubmit="{!c.onRecordSubmit}"
+                                onsuccess="{!c.onRecordSuccess}">
+    <div class="slds-box">
+        <lightning:messages />
+        <lightning:inputField fieldName="HoHocSinh__c"/>
+        <lightning:inputField fieldName="TenHocSinh__c"/>
+        <lightning:inputField fieldName="GioiTinh__c"/>
+        <lightning:inputField fieldName="NgaySinh__c"/>
+        <lightning:inputField fieldName="Diem1__c"/>
+        <lightning:inputField fieldName="Diem2__c"/>
+        <lightning:inputField fieldName="Diem3__c"/>
+        <lightning:inputField fieldName="Lop__c"/>
+        <lightning:button class="slds-m-top_small" type="submit" label="Thêm mới" />
+    </div>
+    </lightning:recordEditForm>
+</lightning:card>
+</aura:component>	
