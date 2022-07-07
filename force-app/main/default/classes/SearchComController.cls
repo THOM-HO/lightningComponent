@@ -1,41 +1,22 @@
 public with sharing class SearchComController {
     @AuraEnabled
-    public static Account getAccountFromId(String accId){
-		List<Account> lstAccount = [SELECT Id,Name FROM Account WHERE Id = :accId];
-        if(!lstAccount.isEmpty()){
-            return lstAccount[0];
-        } else {
-            return new Account();
-        }
-    }
-    
-    @AuraEnabled
-    public static void saveData(Account acc){
-		upsert acc; // Nếu account chưa Id -> insert / Nếu account có Id -> update
-    }
-    
-    @AuraEnabled
-    public static void deleteAccount(String accId){
-        // Dùng Database.delete để delete record theo Id
+    public static void deleteStudent(String accId){
         Database.delete(accId);
-        // Dùng delete object để delete record theo object
-        // Tham khảo thêm:
-        // https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_methods_system_database.htm
     }
     
     @AuraEnabled
-    public static List<Account> searchAccount(String searchCondition){
-        List<Account> accounts = new List<Account>();
+    public static List<HocSinh__c> searchStudent(String searchCondition){
+        List<HocSinh__c> students = new List<HocSinh__c>();
         if(String.isNotBlank(searchCondition)){
             String likeCondition = '%'+searchCondition+'%';
-            accounts = [SELECT Id,Name,Owner.Name 
-                        FROM Account 
-                        WHERE Name LIKE :likeCondition];
+            students = [SELECT Id,HoHocSinh__c,TenHocSinh__c 
+                        FROM HocSinh__c 
+                        WHERE TenHocSinh__c LIKE :likeCondition];
         } else {
-            accounts = [SELECT Id,Name,Owner.Name FROM Account];
+            students = [SELECT Id,HoHocSinh__c,TenHocSinh__c FROM HocSinh__c ];
         }
         System.debug('==searchCondition==' + searchCondition);
-        System.debug('==accounts==' + accounts);
-        return accounts;
+        System.debug('==accounts==' + students);
+        return students;
     }
 }

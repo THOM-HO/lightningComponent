@@ -2,11 +2,11 @@
 	
     deleteData : function(component) {
         
-        var action = component.get('c.deleteAccount');
-        action.setParams({ accId : component.get("v.currentAccountId") });
+        var action = component.get('c.deleteStudent');
+        action.setParams({ accId : component.get("v.currentStudentId") });
         
-        console.log('==currentAccountId==');
-        console.log(component.get("v.currentAccountId"));
+        console.log('==currentStudentId==');
+        console.log(component.get("v.currentStudentId"));
         
         action.setCallback(this, function(actionResult){
             var state = actionResult.getState();

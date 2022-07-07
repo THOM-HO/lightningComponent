@@ -17,7 +17,7 @@
       
       console.log('==params.Id==' + params.Id);
       
-      component.set("v.currentAccountId", params.Id);
+      component.set("v.currentStudentId", params.Id);
       // hien thi modal 
       component.set("v.isModalOpen", true);
    },

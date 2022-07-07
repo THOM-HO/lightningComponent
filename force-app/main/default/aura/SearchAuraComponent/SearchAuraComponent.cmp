@@ -2,12 +2,13 @@
                 access="global"
                 controller="SearchComController">
                 <aura:attribute name="searchCondition" type="String"/>
-                <aura:attribute name="accounts" type="Account[]"/>
+
+                <aura:attribute name="students" type="Array[]"/>
                 
                 <!--init SF hỗ trợ sẽ gọi đầu tiên sau khi load page, gọi chạy hàm doInit-->
                 <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
             
-                <aura:handler name="reload_evt" event="c:account_reload_evt" action="{!c.handleReloadEvent}"/>
+                <aura:handler name="reload_evt" event="c:student_reload_evt" action="{!c.handleReloadEvent}"/>
                 <lightning:input type="text" variant="label-hidden" value="{!v.searchCondition}" />
                 <br/>
                 <div>
@@ -19,7 +20,7 @@
                                       variant="neutral"
                                       type="submit"/>
                     
-                    <lightning:button onclick="{!c.newAccount}"
+                    <lightning:button onclick="{!c.newStudent}"
                                       label="New"
                                       iconName="utility:new"
                                       iconPosition="left"
@@ -34,33 +35,39 @@
                 <table class="slds-table slds-no-row-hover slds-table_bordered">
                     <colgroup>
                         <col width="5%"/>
-                        <col width="60%"/>
+                        <col width="30%"/>
+                        <col width="30%"/>
                         <col width="35%"/>
                     </colgroup>
                     <thead>
                         <tr class="slds-text-heading_label">
                             <th scope="col">STT</th>
-                            <th scope="col">Name</th>
+                            <th scope="col">Họ</th>
+                            <th scope="col">Tên</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <aura:iteration items="{!v.accounts}" var="item" indexVar="index">
+                        <aura:iteration items="{!v.students}" var="item" indexVar="index">
                             <tr>
                                 <td>
                                     {!index+1}
                                 </td>
                                 <td>
-                                    {!item.Name}
+                                    {!item.HoHocSinh__c}
                                 </td>
                                 <td>
-                                    <lightning:buttonIcon name="{!item.Id}" onclick="{!c.editAccount}" size="small" iconName="utility:edit" alternativeText="Edit"/>
-                                    <lightning:buttonIcon name="{!item.Id}" onclick="{!c.deleteAccount}" size="small" iconName="utility:delete" alternativeText="Delete"/>
+                                    {!item.TenHocSinh__c}
+                                </td>
+                                <td>
+                                    <lightning:buttonIcon name="{!item.Id}" onclick="{!c.editStudent}" size="small" iconName="utility:edit" alternativeText="Edit"/>
+                                    <lightning:buttonIcon name="{!item.Id}" onclick="{!c.deleteStudent}" size="small" iconName="utility:delete" alternativeText="Delete"/>
                                 </td>
                             </tr>
                         </aura:iteration>
                     </tbody>
                 </table>
-                <c:EditModalCustom aura:id="account_model" />
+                <c:CreateModalCustom aura:id="create_student_model" />
+                <c:EditModalCustom aura:id="edit_student_modal" />
                 <c:DeleteModalCustom aura:id="confirm_delete_modal" />
 </aura:component>
