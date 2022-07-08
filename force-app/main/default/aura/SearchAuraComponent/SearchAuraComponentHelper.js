@@ -10,8 +10,13 @@
             {
                 let listResult= actionResult.getReturnValue();
                 for(let student of listResult){
-                    console.log('sdsdsdsd'+JSON.stringify(student));// có dữ liệu được log ra
-                    listStudent.push(student);// dòng này deploy lên bị lỗi
+                    const target = student;
+                    const source = { isSelected: false};
+
+                    const returnedTarget = Object.assign(target, source);
+                    console.log('sdsdsdsd'+JSON.stringify(returnedTarget));
+                    listStudent.push(returnedTarget);
+
                 }
                 
                 component.set('v.students', listStudent);

@@ -22,5 +22,10 @@
     handleReloadEvent: function(component, event, helper) {
         console.log('==handleReloadEvent==');
         helper.getStudents(component);
+    },
+
+    isCheck:function(component, event, helper) {
+        var recordId = event.getSource().get('v.name');
+        console.log('==checkId==' + recordId);
     }
 })

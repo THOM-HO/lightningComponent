@@ -1,0 +1,78 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" 
+access="global"
+controller="SearchComController">
+    <!-- attributes -->
+    <aura:attribute name="students" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="name" type="String" />
+    <aura:attribute name="isSort" type="Boolean" default="false"/>
+    <aura:attribute name="class" type="String" />
+    <aura:attribute name="startBirthday" type="Date" />
+    <aura:attribute name="endBirthday" type="Date" />
+    <aura:attribute name="listClass" type="List"/>
+
+    <!-- handlers-->
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <aura:handler name="reload_evt" event="c:student_reload_evt" action="{!c.handleReloadEvent}"/>
+    
+     <!-- Section 1: Vùng điều kiện search -->
+    <lightning:card >
+        <div>
+            <lightning:input name="input1" value="{!v.name}" label="Tên :" />
+            <ui:inputCheckbox label="Sắp xếp tăng dần theo tên :" value="{!v.isSort}"/>
+
+            <lightning:select name="classId" label="Lớp" aura:id="classId" value="{!v.class}">
+                <option text="Tất cả"/>
+                <aura:iteration items="{!v.listClass}" var="option">
+                    <option text="{!option.TenLop__c}" value="{!option.Id}"/>
+                </aura:iteration>
+            </lightning:select>
+
+            <lightning:input type="date" name="input2" label="Ngày sinh" value="{!v.startBirthday}"/>
+            <lightning:input type="date" name="input3" label=" - " value="{!v.endBirthday}"/>
+        </div>
+        <div>       
+            <lightning:button onclick="{!c.search}"
+                              label="Search"
+                              iconName="utility:search"
+                              iconPosition="left"
+                              variant="neutral"
+                              type="submit"/>
+            
+            <lightning:button onclick="{!c.newStudent}"
+                              label="New"
+                              iconName="utility:new"
+                              iconPosition="left"
+                              variant="neutral"
+                              class="slds-size_4-of-10"
+                              type="submit"/>
+
+            <lightning:button onclick="{!c.deleteAll}"
+                              label="Xóa"
+                              iconName="utility:delete"
+                              iconPosition="left"
+                              variant="neutral"
+                              class="slds-size_4-of-10"
+                              type="submit"/>
+            
+        </div>
+    </lightning:card>
+
+    <!-- Section 2: Hiển thị kết quả tìm kiếm -->
+    <lightning:card >
+        <div style="height: 300px">
+            <lightning:datatable
+                columns="{! v.columns }"
+                data="{! v.students }"
+                keyField="id"
+                onrowaction="{! c.handleRowAction }"/>
+        </div>
+    </lightning:card>
+
+    <!-- Section 3: Modal -->
+    <c:CreateModalCustom aura:id="create_student_modal" />
+    <c:EditModalCustom aura:id="edit_student_modal" />
+    <c:DeleteModalCustom aura:id="confirm_delete_modal" />
+    <c:DetailModalCustom aura:id="detail_student_modal" />
+
+</aura:component>

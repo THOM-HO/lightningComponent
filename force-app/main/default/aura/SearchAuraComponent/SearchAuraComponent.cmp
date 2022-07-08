@@ -35,29 +35,64 @@
                 <table class="slds-table slds-no-row-hover slds-table_bordered">
                     <colgroup>
                         <col width="5%"/>
-                        <col width="30%"/>
-                        <col width="30%"/>
-                        <col width="35%"/>
+                        <col width="10%"/>
+                        <col width="10%"/>
+                        <col width="10%"/>
+                        <col width="5%"/>
+                        <col width="10%"/>
+                        <col width="10%"/>
+                        <col width="10%"/>
+                        <col width="10%"/>
+                        <col width="10%"/>
+                        <col width="10%"/>
                     </colgroup>
                     <thead>
                         <tr class="slds-text-heading_label">
-                            <th scope="col">STT</th>
+                            <th scope="col"> </th>
                             <th scope="col">Họ</th>
                             <th scope="col">Tên</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">Ngày sinh</th>
+                            <th scope="col">Giới tính</th>
+                            <th scope="col">Điểm 1</th>
+                            <th scope="col">Điểm 2</th>
+                            <th scope="col">Điểm 3</th>
+                            <th scope="col">Điểm TB</th>
+                            <th scope="col">Tình trạng</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <aura:iteration items="{!v.students}" var="item" indexVar="index">
                             <tr>
                                 <td>
-                                    {!index+1}
+                                   <lightning:input type="checkbox"  onclick="{!c.isCheck}"/>
                                 </td>
                                 <td>
                                     {!item.HoHocSinh__c}
                                 </td>
                                 <td>
                                     {!item.TenHocSinh__c}
+                                </td>
+                                <td>
+                                    {!item.NgaySinh__c}
+                                </td>
+                                <td>
+                                    {!item.GioiTinh__c}
+                                </td>
+                                <td>
+                                    {!item.Diem1__c}
+                                </td>
+                                <td>
+                                    {!item.Diem2__c}
+                                </td>
+                                <td>
+                                    {!item.Diem3__c}
+                                </td>
+                                <td>
+                                    {!item.DiemTB__c}
+                                </td>
+                                <td>
+                                    {!item.TinhTrang__c}
                                 </td>
                                 <td>
                                     <lightning:buttonIcon name="{!item.Id}" onclick="{!c.editStudent}" size="small" iconName="utility:edit" alternativeText="Edit"/>
